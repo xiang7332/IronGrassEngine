@@ -13,7 +13,7 @@ int main()
     engine_context.setWindow(w);
 
    
-    IronRender ourShader("shader\\shader.vs","shader\\shader.fs");
+    IronRender ourShader;
     IronObject ourObject;
 
     ourObject.addVertices(-0.5f, -0.5f, 0.0f);

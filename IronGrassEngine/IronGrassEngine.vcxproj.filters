@@ -67,6 +67,7 @@
     <None Include="shader\shader.fs">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="shader\1.txt">

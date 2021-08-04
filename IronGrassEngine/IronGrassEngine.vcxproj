@@ -123,6 +123,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="shader\shader.fs" />
     <None Include="shader\shader.vs">
       <DeploymentContent>true</DeploymentContent>

@@ -1,79 +1,43 @@
 #include "IronGrassEngine.h"
 #include "IronRender.h"
 
-std::string IronRender::readFile(const char* path)
+const char* IronRender::readFile(const char* path)
 {
-	std::string vertexCode, fragmentCode;
-	std::ifstream vShaderFile, fShaderFile;
-	std::stringstream vShaderStream, fShaderStream;
-	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	std::string Code;
+	std::ifstream ShaderFile;
+	std::stringstream ShaderStream;
+	ShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try
 	{
-		// open files
-		vShaderFile.open(path);
-		// read file's buffer contents into streams
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
-		vShaderFile.close();
-		fShaderFile.close();
-		// convert stream into string
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
+		//打开文件
+		ShaderFile.open(path);
+		//把文件读进流
+		ShaderStream << ShaderFile.rdbuf();
+		//关闭文件
+		ShaderFile.close();
+		//转换代码
+		Code = ShaderStream.str();
 
-		std::cout << "Vertex Shader File Read" << std::endl;
+		plogln("Shader File Read");
 	}
 	catch (std::ifstream::failure e)
 	{
-		plogln("Vertex Shader File Read Failed");
-		plog("fragmentShaderSourcePath  >");
+		plogln("Shader File Read Failed");
+		plog("Shader Source Path  >");
 		plogln(path);
 	}
-	const char* vShaderCode = vertexCode.c_str();
-	const char* fShaderCode = fragmentCode.c_str();
-
-	return std::string();
+	return Code.c_str();
 }
 
-IronRender::IronRender(const char* vertexShaderSourcePath, const char* fragmentShaderSourcePath)
+IronRender::IronRender()
 {
 	//1:加载着色器代码
-	std::string vertexCode, fragmentCode;
-	std::ifstream vShaderFile, fShaderFile;
-	std::stringstream vShaderStream, fShaderStream;
-	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try
-	{
-		// open files
-		vShaderFile.open(vertexShaderSourcePath);
-		fShaderFile.open(fragmentShaderSourcePath);
-		// read file's buffer contents into streams
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
-		vShaderFile.close();
-		fShaderFile.close();
-		// convert stream into string
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-
-		std::cout << "Vertex Shader File Read" << std::endl;
-	}
-	catch (std::ifstream::failure e)
-	{
-		std::cout << "Vertex Shader File Read Failed"
-			<< "\nvertexShaderSourcePath  >" << vertexShaderSourcePath
-			<< "\nfragmentShaderSourcePath  >" << fragmentShaderSourcePath << std::endl << std::endl;
-	}
-	const char* vShaderCode = vertexCode.c_str();
-	const char* fShaderCode = fragmentCode.c_str();
+	
 
 	//2:编译着色器
+	/*
 	unsigned int vertexShader, fragmentShader;
-	int success;
-	char infoLog[512];
+	
 
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vShaderCode, NULL);
@@ -96,30 +60,64 @@ IronRender::IronRender(const char* vertexShaderSourcePath, const char* fragmentS
 		std::cout << "FragmentShader shader Compile failed\n" << infoLog;
 	else
 		std::cout << "FragmentShader shader Compile\n" << infoLog;
+	*/
 
 	//Shader Program
 	ID = glCreateProgram();
+	/*
 	glAttachShader(ID, vertexShader);
 	glAttachShader(ID, fragmentShader);
+	*/
+
+	//del shader
+	/*
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	*/
+}
+
+void IronRender::addShader(GLenum type, const char* SourcePath)
+{
+	//TODO 添加代码
+	unsigned int shader;
+	const char* code;
+
+	code = readFile(SourcePath);
+	shader = glCreateShader(type);
+	glShaderSource(shader, 1, &code, NULL);
+	glCompileShader(shader);
+	if (!success)
+	{ 
+		plogln("Vertex shader Compile failed");
+		plogln(infoLog);
+	}
+	else
+	{ 
+		plogln("Vertex shader Compile");
+		plogln(infoLog);
+	}
+	shaders.push_back(shader);
+}
+
+void IronRender::LinkProgram()
+{
 	glLinkProgram(ID);
 	//check error
 	glGetProgramiv(ID, GL_LINK_STATUS, &success);
 	glGetProgramInfoLog(ID, 512, NULL, infoLog);
 	if (!success)
-		std::cout << "Shader program Link failed\n" << infoLog;
+	{
+		plogln("Shader program Link failed");
+		plogln(infoLog);
+	}
 	else
-		std::cout << "Shader program Link\n" << infoLog;
-	//del shader
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-}
-
-void IronRender::addShader(GLenum type, const char* SourcePath)
-{
-}
-
-void IronRender::LinkProgram()
-{
+	{
+		plogln("Shader program Link");
+		plogln(infoLog);
+	}
+	//删除着色器
+	for (int i = 0; i < shaders.size(); i++)
+		glDeleteShader(shaders[i]);
 }
 
 void IronRender::use()

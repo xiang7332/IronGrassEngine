@@ -7,12 +7,15 @@ class IronRender
 {
 private:
 	int ID;
+	int success;
+	char infoLog[512];
+	std::vector<int> shaders;
 
 private:
-	std::string readFile(const char* path);
+	const char* readFile(const char* path);
 
 public:
-	IronRender(const char* vertexShaderSourcePath, const char* fragmentShaderSourcePath);
+	IronRender();
 	void addShader(GLenum type, const char* SourcePath);
 	void LinkProgram();
 	void use();
