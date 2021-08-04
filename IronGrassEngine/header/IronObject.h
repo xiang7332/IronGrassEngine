@@ -3,16 +3,19 @@ class IronObject
 {
 private:
 	unsigned int VAO, VBO, EBO;
-	std::vector<float[3]> vertices;
-	std::vector<int[3]> indices;
+	std::vector<std::vector<float>> vertices;
+	std::vector<std::vector<int>> indices;
 
 public:
-	IronObject(const char* verticesFilePath, const char* indicesFilePath, GLenum usage);
+	IronObject();
 	~IronObject();
 
 public:
 	void draw();
 	void addVertices(float x, float y, float z);
-	void addIndices(float one, float two, float three);
+	void addVertices(float pos[3]);
+	void addIndices(int one, int two, int three);
+	void addIndices(int pos[3]);
+	void done(GLenum usage);
 };
 
