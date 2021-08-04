@@ -24,13 +24,19 @@ int main()
 
     ourObject.done(GL_STATIC_DRAW);
 
+    ourShader.addShader(GL_VERTEX_SHADER, "shader\\shader.vs");
+    ourShader.addShader(GL_FRAGMENT_SHADER, "shader\\shader.fs");
+
+    ourShader.LinkProgram();
+
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     while(!glfwWindowShouldClose(w.mwindow))
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        
         ourShader.use();
         ourObject.draw();
 
