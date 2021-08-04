@@ -14,14 +14,23 @@ int main()
 
    
     IronRender ourShader("shader\\shader.vs","shader\\shader.fs");
-    IronObject ourObject("shader\\1.txt", "shader\\2.txt", GL_DYNAMIC_DRAW);
+    IronObject ourObject;
+
+    ourObject.addVertices(-0.5f, -0.5f, 0.0f);
+    ourObject.addVertices(0.5f, -0.5f, 0.0f);
+    ourObject.addVertices(0.0f, 0.5f, 0.0f);
+
+    ourObject.addIndices(0, 1, 2);
+
+    ourObject.done(GL_STATIC_DRAW);
+
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     while(!glfwWindowShouldClose(w.mwindow))
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         ourShader.use();
         ourObject.draw();
 
