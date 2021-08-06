@@ -124,9 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="shader\shader.fs" />
+    <None Include="shader\shader.fs">
+      <FileType>Text</FileType>
+    </None>
     <None Include="shader\shader.vs">
-      <DeploymentContent>true</DeploymentContent>
+      <DeploymentContent>false</DeploymentContent>
+      <FileType>Text</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>

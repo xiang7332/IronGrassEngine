@@ -7,16 +7,14 @@ class IronRender
 {
 private:
 	int ID;
-	int success = 0;
-	char infoLog[512] = { ' ' };
+	int success;
+	char infoLog[1024];
 	std::vector<int> shaders;
 
-private:
-	const char* readFile(const char* path);
 
 public:
 	IronRender();
-	void addShader(GLenum type, const char* SourcePath);
+	void addShader(GLenum type, const char* sourcePath);
 	void LinkProgram();
 	void use();
 
