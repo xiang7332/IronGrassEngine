@@ -61,6 +61,3 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-
-include/* linguist-language=library
-/glad.c linguist-language=library
