@@ -7,8 +7,8 @@ class IronRender
 {
 private:
 	int ID;
-	int success;
-	char infoLog[1024];
+	int success=NULL;
+	char infoLog[1024] = { NULL };
 	std::vector<int> shaders;
 
 

@@ -20,8 +20,6 @@ int main()
     ourObject.addVertices(0.5f, -0.5f, 0.0f);
     ourObject.addVertices(0.0f, 0.5f, 0.0f);
 
-    ourObject.addIndices(0, 1, 2);
-
     ourObject.done(GL_STATIC_DRAW);
 
     ourShader.addShader(GL_VERTEX_SHADER, "shader\\shader.vs");

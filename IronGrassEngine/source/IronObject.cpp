@@ -1,12 +1,18 @@
 #include "IronGrassEngine.h"
 #include "IronObject.h"
 
-IronObject::IronObject()
+IronObject::IronObject(bool useEBO)
 {
+	uEBO = useEBO;
+	
+
 	//初始化buffer
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &EBO);
+	if (uEBO)
+		glGenBuffers(1, &EBO);
+	else
+		EBO = 0;
 }
 
 IronObject::~IronObject()
@@ -14,12 +20,6 @@ IronObject::~IronObject()
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
-}
-
-void IronObject::draw()
-{
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 }
 
 void IronObject::addVertices(float x, float y, float z)
@@ -52,16 +52,20 @@ void IronObject::addIndices(int pos[3])
 	addIndices(pos[0], pos[1], pos[2]);
 }
 
-void IronObject::done(GLenum usage)
+void IronObject::done(GLenum usage, bool useEBO)
 {
 	std::vector<float> allverctives;
 	std::vector<int> allIndices;
+	uEBO = useEBO;
 	for (int i = 0; i < vertices.size(); i++)
 		for (int j = 0; j <= 2; j++)
 			allverctives.push_back(vertices[i][j]);
-	for (int i = 0; i < indices.size(); i++)
-		for (int j = 0; j <= 2; j++)
-			allIndices.push_back(indices[i][j]);
+
+	if (useEBO) {
+		for (int i = 0; i < indices.size(); i++)
+			for (int j = 0; j <= 2; j++)
+				allIndices.push_back(indices[i][j]);
+	}
 
 	//第一次先绑定在设置
 	glBindVertexArray(VAO);
@@ -69,9 +73,13 @@ void IronObject::done(GLenum usage)
 	//VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(allverctives.data()), allverctives.data(), usage);
+	
 	//EBO
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(allIndices.data()), allIndices.data(), usage);
+	if (useEBO) {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(allIndices.data()), allIndices.data(), usage);
+	}
+
 	//Vertex Attributes
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -79,4 +87,13 @@ void IronObject::done(GLenum usage)
 	//解除绑定
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+void IronObject::draw()
+{
+	glBindVertexArray(VAO);
+	if (uEBO)
+		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+	else
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
