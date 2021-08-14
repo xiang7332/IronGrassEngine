@@ -13,20 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1de91506-7169-4954-9ac1-5350b2fc21d6}</ProjectGuid>
-    <RootNamespace>IronGrassEngine</RootNamespace>
+    <ProjectGuid>{f8f96e17-4dc9-43c5-838b-4940f1125cda}</ProjectGuid>
+    <RootNamespace>INewGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -46,21 +45,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\INewGame\header;C:\Users\jgyys\source\repos\IronGrassEngine\include;C:\Users\jgyys\source\repos\IronGrassEngine\IronGrassEngine\header;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\jgyys\source\repos\IronGrassEngine\lib;$(LibraryPath)</LibraryPath>
-    <CopyCppRuntimeToOutputDir>false</CopyCppRuntimeToOutputDir>
-    <TargetName>$(ProjectName) $(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\INewGame\header;C:\Users\jgyys\source\repos\IronGrassEngine\include;C:\Users\jgyys\source\repos\IronGrassEngine\IronGrassEngine\header;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\jgyys\source\repos\IronGrassEngine\lib;$(LibraryPath)</LibraryPath>
-    <CopyCppRuntimeToOutputDir>false</CopyCppRuntimeToOutputDir>
-    <TargetName>$(ProjectName) $(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -69,20 +64,17 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <FloatingPointModel>Precise</FloatingPointModel>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <PrecompiledHeaderFile>IronGrassEngine.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/wd5105 /wd4100 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>INewGame.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -93,46 +85,30 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <FloatingPointModel>Precise</FloatingPointModel>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <PrecompiledHeaderFile>IronGrassEngine.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/wd5105 /wd4100 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>INewGame.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\glad.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="header\IronGrassEngine.cpp" />
-    <ClCompile Include="source\IronEngine.cpp" />
-    <ClCompile Include="source\IronObject.cpp" />
-    <ClCompile Include="source\IronRender.cpp" />
-    <ClCompile Include="source\IronWindow.cpp" />
+    <ProjectReference Include="..\IronGrassEngine\IronGrassEngine.vcxproj">
+      <Project>{1de91506-7169-4954-9ac1-5350b2fc21d6}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\IronEngine.h" />
-    <ClInclude Include="header\IronGrassEngine.h" />
-    <ClInclude Include="header\IronObject.h" />
-    <ClInclude Include="header\IronRender.h" />
-    <ClInclude Include="header\IronWindow.h" />
-    <ClInclude Include="resource.h" />
+    <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <ClInclude Include="header\INewGame.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="IronGrassEngine.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\IronGrass.ico" />
+    <None Include="shader\shader.frag" />
+    <None Include="shader\shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

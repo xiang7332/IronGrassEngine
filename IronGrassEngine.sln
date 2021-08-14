@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IronGrassEngine", "IronGrassEngine\IronGrassEngine.vcxproj", "{1DE91506-7169-4954-9AC1-5350B2FC21D6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "INewGame", "INewGame\INewGame.vcxproj", "{F8F96E17-4DC9-43C5-838B-4940F1125CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{1DE91506-7169-4954-9AC1-5350B2FC21D6}.Debug|x64.Build.0 = Debug|x64
 		{1DE91506-7169-4954-9AC1-5350B2FC21D6}.Release|x64.ActiveCfg = Release|x64
 		{1DE91506-7169-4954-9AC1-5350B2FC21D6}.Release|x64.Build.0 = Release|x64
+		{F8F96E17-4DC9-43C5-838B-4940F1125CDA}.Debug|x64.ActiveCfg = Debug|x64
+		{F8F96E17-4DC9-43C5-838B-4940F1125CDA}.Debug|x64.Build.0 = Debug|x64
+		{F8F96E17-4DC9-43C5-838B-4940F1125CDA}.Release|x64.ActiveCfg = Release|x64
+		{F8F96E17-4DC9-43C5-838B-4940F1125CDA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,9 +30,6 @@
     <ClCompile Include="source\IronWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\glad.c">
       <Filter>GLAD</Filter>
     </ClCompile>
@@ -61,21 +58,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader\shader.vs">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="shader\shader.fs">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="cpp.hint" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="shader\1.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="shader\2.txt">
-      <Filter>资源文件</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="IronGrassEngine.rc">

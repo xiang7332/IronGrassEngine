@@ -4,9 +4,9 @@ class IronObject
 {
 private:
 	unsigned int VAO, VBO, EBO;
-	bool uEBO;
-	std::vector<std::vector<float>> vertices;
-	std::vector<std::vector<int>> indices;
+	bool uEBO, set;
+	std::vector<float> vertices;
+	std::vector<int> indices;
 
 public:
 	IronObject(bool useEBO = false);
@@ -15,9 +15,14 @@ public:
 public:
 	void addVertices(float x, float y, float z);
 	void addVertices(float pos[3]);
+	void setVertices(float vertices[]);
+	void clearVertices();
+
 	void addIndices(int one, int two, int three);
 	void addIndices(int pos[3]);
-	void done(GLenum usage, bool useEBO = false);
+	void setIndices(int indices[]);
+	void clearIndices();
+
+	void done(GLenum usage);
 	void draw();
 };
-

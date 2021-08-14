@@ -4,8 +4,7 @@
 IronObject::IronObject(bool useEBO)
 {
 	uEBO = useEBO;
-	
-
+	set = false;
 	//初始化buffer
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
@@ -24,12 +23,9 @@ IronObject::~IronObject()
 
 void IronObject::addVertices(float x, float y, float z)
 {
-	std::vector<float> thisLine;
-	thisLine.push_back(x);
-	thisLine.push_back(y);
-	thisLine.push_back(z);
-
-	vertices.push_back(thisLine);
+	vertices.push_back(x);
+	vertices.push_back(y);
+	vertices.push_back(z);
 }
 
 void IronObject::addVertices(float pos[3])
@@ -37,14 +33,25 @@ void IronObject::addVertices(float pos[3])
 	addVertices(pos[0], pos[1], pos[2]);
 }
 
+void IronObject::setVertices(float v[])
+{
+  	clearVertices();
+	for (int i = 0; i < sizeof(v); i++)
+	{
+		vertices.push_back(v[i]);
+	}
+}
+
+void IronObject::clearVertices()
+{
+	vertices.clear();
+}
+
 void IronObject::addIndices(int one, int two, int three)
 {
-	std::vector<int> thisLine;
-	thisLine.push_back(one);
-	thisLine.push_back(two);
-	thisLine.push_back(three);
-
-	indices.push_back(thisLine);
+	indices.push_back(one);
+	indices.push_back(two);
+	indices.push_back(three);
 }
 
 void IronObject::addIndices(int pos[3])
@@ -52,32 +59,27 @@ void IronObject::addIndices(int pos[3])
 	addIndices(pos[0], pos[1], pos[2]);
 }
 
-void IronObject::done(GLenum usage, bool useEBO)
+void IronObject::setIndices(int i[])
 {
-	std::vector<float> allverctives;
-	std::vector<int> allIndices;
-	uEBO = useEBO;
-	for (int i = 0; i < vertices.size(); i++)
-		for (int j = 0; j <= 2; j++)
-			allverctives.push_back(vertices[i][j]);
+}
 
-	if (useEBO) {
-		for (int i = 0; i < indices.size(); i++)
-			for (int j = 0; j <= 2; j++)
-				allIndices.push_back(indices[i][j]);
-	}
+void IronObject::clearIndices()
+{
+}
 
+void IronObject::done(GLenum usage)
+{
 	//第一次先绑定在设置
 	glBindVertexArray(VAO);
-	
+
 	//VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(allverctives.data()), allverctives.data(), usage);
-	
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices.data()), vertices.data(), usage);
+
 	//EBO
-	if (useEBO) {
+	if (uEBO) {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(allIndices.data()), allIndices.data(), usage);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices.data()), indices.data(), usage);
 	}
 
 	//Vertex Attributes
@@ -87,15 +89,20 @@ void IronObject::done(GLenum usage, bool useEBO)
 	//解除绑定
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	set = true;
 }
 
 void IronObject::draw()
 {
 	glBindVertexArray(VAO);
+	/*
 	if (uEBO)
 		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 	else
-		glDrawArrays(GL_TRIANGLES, 0, 
+		glDrawArrays(GL_TRIANGLES, 0,
 			static_cast<GLsizei>(vertices.size()) //消除C4267
 		);
+	*/
+	glDrawArrays(GL_TRIANGLES, 0, 9);
 }
