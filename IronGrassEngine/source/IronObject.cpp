@@ -4,7 +4,6 @@
 IronObject::IronObject(bool useEBO)
 {
 	uEBO = useEBO;
-	set = false;
 	//初始化buffer
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
@@ -35,10 +34,11 @@ void IronObject::addVertices(float pos[3])
 
 void IronObject::setVertices(float v[])
 {
-  	clearVertices();
-	for (int i = 0; i < sizeof(v); i++)
+	clearVertices();
+	for (int i = 0; i < sizeof(v)+1; i++)
 	{
 		vertices.push_back(v[i]);
+		std::cout << v[i] << " ";
 	}
 }
 
@@ -83,14 +83,13 @@ void IronObject::done(GLenum usage)
 	}
 
 	//Vertex Attributes
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(0);
 
 	//解除绑定
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	set = true;
 }
 
 void IronObject::draw()

@@ -4,7 +4,7 @@ class IronObject
 {
 private:
 	unsigned int VAO, VBO, EBO;
-	bool uEBO, set;
+	bool uEBO;
 	std::vector<float> vertices;
 	std::vector<int> indices;
 
