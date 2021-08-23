@@ -138,7 +138,7 @@ void IronObject::draw()
 	glBindVertexArray(VAO);
 	if (uEBO)
 		glDrawElements(GL_TRIANGLES, 
-			6, //Ïû³ýC4267
+			static_cast<GLsizei>(indices.size()), //Ïû³ýC4267
 			GL_UNSIGNED_INT,
 			0
 		);
