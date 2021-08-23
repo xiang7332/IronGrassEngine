@@ -3,10 +3,13 @@
 class IronObject
 {
 private:
-	unsigned int VAO, VBO, EBO;
+	unsigned int VAO;
 	bool uEBO;
 	std::vector<float> vertices;
 	std::vector<int> indices;
+
+private:
+	void SetUpVertexAttributes();
 
 public:
 	IronObject(bool useEBO = false);
@@ -24,5 +27,10 @@ public:
 	void clearIndices();
 
 	void done(GLenum usage);
+
+	//done()无法使用时手动设置顶点(三角形位置)
+	void doneWith(GLenum usage, float vertices[],__int64 size);
+	void doneWith(GLenum usage, float vertices[], __int64 verticesSize, int indices[], __int64 indicesSize);
+
 	void draw();
 };

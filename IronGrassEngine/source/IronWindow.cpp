@@ -22,7 +22,6 @@ void IronWindow::get(GLFWwindow* window)
 	}
 	mwindow = window;
 	glfwSetFramebufferSizeCallback(mwindow, framebuffer_size_callback);
-	glfwSetWindowSizeLimits(mwindow, GLFW_DONT_CARE, GLFW_DONT_CARE, 1920, 1080);
 	glfwMakeContextCurrent(mwindow);
 
 	//initialize GLAD
