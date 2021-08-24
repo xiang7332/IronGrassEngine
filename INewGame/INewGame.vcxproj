@@ -47,11 +47,15 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\INewGame\header;C:\Users\jgyys\source\repos\IronGrassEngine\include;C:\Users\jgyys\source\repos\IronGrassEngine\IronGrassEngine\header;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <GlfwLinkage>static</GlfwLinkage>
+    <GlfwPlatformToolset>v142</GlfwPlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Users\jgyys\source\repos\IronGrassEngine\INewGame\header;C:\Users\jgyys\source\repos\IronGrassEngine\include;C:\Users\jgyys\source\repos\IronGrassEngine\IronGrassEngine\header;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <GlfwLinkage>static</GlfwLinkage>
+    <GlfwPlatformToolset>v142</GlfwPlatformToolset>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

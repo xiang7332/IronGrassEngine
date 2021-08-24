@@ -25,6 +25,7 @@ int main()
 	ourShader.addShader(GL_FRAGMENT_SHADER, "shader\\shader.frag");
 
 	ourShader.LinkProgram();
+	w.enableVsync();
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	while (!glfwWindowShouldClose(w.mwindow))
 	{

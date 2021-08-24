@@ -1,6 +1,11 @@
 #include "IronGrassEngine.h"
 #include "IronWindow.h"
 
+void IronWindow::enableVsync()
+{
+	glfwSwapInterval(1);
+}
+
 void IronWindow::close()
 {
 	glfwSetWindowShouldClose(mwindow, true);
